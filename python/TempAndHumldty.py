@@ -86,7 +86,6 @@ def read_dht11_dat():
 		if length > halfway:
 			bit = 1
 		bits.append(bit)
-	print("bits: %s, length: %d" % (bits, len(bits)))
 	for i in range(0, len(bits)):
 		byte = byte << 1
 		if (bits[i]):
