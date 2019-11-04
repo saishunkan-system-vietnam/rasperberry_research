@@ -1,31 +1,44 @@
-import time
+from imutils import paths
+import face_recognition
+import argparse
+import pickle
 import cv2
 import os
-import numpy as np
-from PIL import Image
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-#Load a cascade file for detecting faces
-face_cascade = cv2.CascadeClassifier(dir_path + '/xml/haarcascade_frontalface_default.xml')
 
 def training():
-    path = dir_path + "/dataSet"
-    faces,ids = getImagesAndLabels(path)
-    recognizer = cv2.face.LBPHFaceRecognizer_create()
-    recognizer.train(faces, np.array(ids))
-    # Save the model into trainer/trainer.yml
-    recognizer.write(dir_path + '/trainer/trainer.yml') 
+	imagePaths = list(paths.list_images(dir_path + "/dataSet"))
+	knownEncodings = []
+	knownNames = []
+	# loop over the image paths
+	for (i, imagePath) in enumerate(imagePaths):
+		# extract the person name from the image path
+		name = imagePath.split(os.path.sep)[-2]
+		print("[INFO] processing image {}/{}".format(i + 1,
+			len(imagePaths)))
+		# load the input image and convert it from RGB (OpenCV ordering)
+		# to dlib ordering (RGB)
+		image = cv2.imread(imagePath)
+		rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-def getImagesAndLabels(path):
-    imagePaths = [os.path.join(path,f) for f in os.listdir(path)]     
-    faceSamples=[]
-    ids = []
-    for imagePath in imagePaths:
-        PIL_img = Image.open(imagePath).convert('L') # convert it to grayscale
-        img_numpy = np.array(PIL_img,'uint8')
-        id = int(os.path.split(imagePath)[-1].split(".")[1])
-        faces = face_cascade.detectMultiScale(img_numpy)
-        for (x,y,w,h) in faces:
-            faceSamples.append(img_numpy[y:y+h,x:x+w])
-            ids.append(id)
-    return faceSamples,ids
+		# detect the (x, y)-coordinates of the bounding boxes
+		# corresponding to each face in the input image
+		boxes = face_recognition.face_locations(rgb,
+			model="hog")
+
+		# compute the facial embedding for the face
+		encodings = face_recognition.face_encodings(rgb, boxes)
+
+		# loop over the encodings
+		for encoding in encodings:
+			# add each encoding + name to our set of known names and
+			# encodings
+			knownEncodings.append(encoding)
+			knownNames.append(name)
+
+	# dump the facial encodings + names to disk
+	data = {"encodings": knownEncodings, "names": knownNames}
+	f = open(dir_path + "faceencodings.pickle", "wb")
+	f.write(pickle.dumps(data))
+	f.close()

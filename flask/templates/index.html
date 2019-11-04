@@ -80,19 +80,37 @@
             <h2>Sensor</h2>
             <div class="row">
               <div class="col-md-4">
-                <img src="{{ url_for('static', filename = 'images/img-02.jpg') }}" class="img-responsive" alt="">
-                <h3 class="h5">Amelia App</h3>
-                <p>June 2017</p>
+                <img src="{{ url_for('static', filename = 'images/firealarm-1.jpg') }}" class="img-responsive" alt="" id="firealarmled" >
+                <h3 class="h5"><button id="buttonFlame">Flame</button>&nbsp;<span id="fire">OFF</span></h3>
               </div>
               <div class="col-md-4">
-                <img src="{{ url_for('static', filename = 'images/img-03.jpg') }}" class="img-responsive" alt="">
-                <h3 class="h5">Portland</h3>
-                <p>March 2017</p>
+		            <h3 class="h5"><button id="buttonLed">Button</button>&nbsp;<span id="ledButton">OFF</span></h3>
               </div>
               <div class="col-md-4">
-                <img src="{{ url_for('static', filename = 'images/img-04.jpg') }}" class="img-responsive" alt="">
-                <h3 class="h5">Denz for Nilon</h3>
-                <p>Jan 2017</p>
+                <h3 class="h5"><button id="buttonMagic">Magic Cup</button>&nbsp;<span id="magicCup">OFF</span></h3>
+              </div>
+              <div class="col-md-4">
+                <h3 class="h5"><button id="buttonReedSwitch">Reed switch</button>&nbsp;<span id="reedswitch">OFF</span></h3>
+              </div>
+              <div class="col-md-4">
+                <h3 class="h5"><button id="buttonTouch">Touch</button>&nbsp;<span id="touchlaser">OFF</span></h3>
+              </div>
+			  <div class="col-md-4">
+                <h3 class="h5"><button id="buttonPIR">PIR</button>&nbsp;<span id="pirsensor">OFF</span></h3>
+              </div>
+              <div class="col-md-4">
+                <h3 class="h5"><button id="buttonAvoid">Avoid</button>&nbsp;<span id="avoidsensor">OFF</span></h3>
+              </div>
+			  <div class="col-md-4">
+                <h3 class="h5"><button id="buttonTracking">Tracking</button>&nbsp;<span id="trackingsensor">OFF</span></h3>
+              </div>
+			  <div class="col-md-4">
+                <h3 class="h5"><button id="buttonKy10">Light blocking</button>&nbsp;<span id="ky10sensor">OFF</span></h3>
+              </div>
+            </div>
+			<div class="row">
+              <div class="col-md-4">
+		            <h3 class="h5"><button id="buttonRotary">Rotary</button>&nbsp;<span id="rotarysensor">OFF</span></h3>
               </div>
             </div>
           </div>
@@ -124,139 +142,6 @@
         </div>
         
 
-        <div class="card">
-          <div class="card-block">
-            <h2>Education</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="education-experience">
-                  <small class="date">2017-2015</small>
-                  <h3 class="h5 date-title">Design Master</h3>
-                  <p>Chicago University</p>
-                </div>
-                
-              </div>
-              <div class="col-md-4">
-                <div class="education-experience">
-                  <small class="date">2015-2012</small>
-                  <h3 class="h5 date-title">Metrics Degree</h3>
-                  <p>Ecole 87</p>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="education-experience">
-                  <small class="date">2012-2011</small>
-                  <h3 class="h5 date-title">Motion Design Course</h3>
-                  <p>Pascal’s Lee Studio</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card">
-          <div class="card-block">
-            <h2>Language</h2>
-            <div class="row">
-              <div class="col-md-4">
-                <div class="language-experience">
-                  <h3 class="h5">English  <small>Bilingual</small></h3>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="language-experience">
-                  <h3 class="h5">French  <small>Fluent</small></h3>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="language-experience">
-                  <h3 class="h5">Russian  <small>Beginner</small></h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-block">
-            <h2>Projects</h2>
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-              <div class="item active">
-                <img src="{{ url_for('static', filename = 'images/img-05.jpg') }}" class="img-responsive" alt="...">
-                <div class="carousel-caption">
-                  <h3 class="h5">Jules for Bastion</h3>
-                  <p>2017</p>
-                </div>
-              </div>
-              <div class="item">
-                <img src="{{ url_for('static', filename = 'images/img-06.jpg') }}" class="img-responsive" alt="...">
-                <div class="carousel-caption">
-                  <h3 class="h5">Jules for Bastion</h3>
-                  <p>2017</p>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="{{ url_for('static', filename = 'images/img-08.jpg') }}" class="img-responsive" alt="...">
-                <div class="carousel-caption">
-                  <h3 class="h5">Jules for Bastion</h3>
-                  <p>2017</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            </ol>
-
-          </div>
-          </div>
-        </div>
-        
-        <div class="card">
-          <div class="card-block">
-            <h2>Social Network</h2>
-            <div class="row">
-              <div class="col-md-3">
-                <p class="social-buttons"><a href="https://twitter.com/" title=""><span class="social-round-icon fa-icon"><i class="fa fa-twitter"></i></span>@David_Folley</a></p>
-              </div>
-              <div class="col-md-3">
-                <p class="social-buttons"><a href="https://www.linkedin.com/" title=""><span class="social-round-icon fa-icon"><i class="fa fa-linkedin"></i></span>David Folley</a></p>
-              </div>
-              <div class="col-md-3">
-                <p class="social-buttons"><a href="https://dribbble.com/" title=""><span class="social-round-icon fa-icon"><i class="fa fa-dribbble"></i></span>David Folley</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-block">
-            <h2>Contact</h2>
-            <form action="" class="reveal-content">
-              <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="subject" placeholder="Subject">
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" rows="5" placeholder="Enter your message"></textarea>
-              </div>
-              <div class="form-group">
-                <button type="submit" class=" btn btn-primary">Send message</button>
-              </div> 
-            </form>
-          </div>
-        </div>
-       
      </div>
    </div>
  </div>
@@ -316,10 +201,64 @@
 <script>
     var socket = io('');
     sid = '';
+    ledButton = false;
     $(document).ready(function(){
       socket.emit('connect');
       socket.emit('tempandhumldty');
+	  $("#buttonFlame").click( function()
+           {
+             socket.emit('flameandbuzzer', {'flamepin' : 13, 'soundpin': 15});
+           }
+      );
 
+      $("#buttonLed").click( function()
+           {
+             socket.emit('buttonled', {'btnpin' : 11, 'ledpin': 12});
+           }
+      );
+
+      $("#buttonMagic").click( function()
+           {
+             socket.emit('magiccups', {'signpin' : 16, 'ledpin': 18});
+           }
+        );
+        
+      $("#buttonReedSwitch").click( function()
+           {
+             socket.emit('reedswitchled', {'reedpin' : 29, 'ledpin': 31});
+           }
+        );
+        
+      $("#buttonTouch").click( function()
+           {
+             socket.emit('touchlaser', {'touchpin' : 33, 'laserpin': 35});
+           }
+        );
+	  $("#buttonPIR").click( function()
+           {
+             socket.emit('pirsensor', {'PIRPin' : 37, 'SoundPin': 15});
+           }
+        );
+	  $("#buttonAvoid").click( function()
+           {
+             socket.emit('avoidsensor', {'ObstaclePin' : 32, 'ledpin': 38});
+           }
+        );
+	  $("#buttonTracking").click( function()
+           {
+             socket.emit('trackingsensor', {'TrackPin' : 40, 'ledpin': 38});
+           }
+        );
+		$("#buttonKy10").click( function()
+           {
+             socket.emit('photointerrupter', {'Ky10Pin' : 36, 'ledpin': 22});
+           }
+        );
+		$("#buttonRotary").click( function()
+           {
+             socket.emit('rotarysetup', {'RoAPin' : 38, 'RoBPin': 13, 'RoSPin': 29, 'LedPin': 31});
+           }
+        );
     });
     socket.on('sid_response', function(msg, cb) {
         sid = msg.data;
@@ -354,6 +293,121 @@
         if (cb)
             cb();
     });
+    // Event to button led
+    socket.on('buttonled_response', function(msg, cb) {
+      var message = '';
+      console.log(JSON.stringify(msg))
+      if(msg.data.flagLed){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#ledButton').html(message);
+    });
+    
+    // Event Reed swich
+    socket.on('reedswitchled_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagUse){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#reedswitch').html(message);
+    });
+    
+    // event touch sensor
+    socket.on('touchlaser_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagUse){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#touchlaser').html(message);
+    });
+
+    // Event to magic cup
+    socket.on('magiccups_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagMagiccups){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#magicCup').html(message);
+    });
+
+    // Event to pirsensor
+    socket.on('pirsensor_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagPIR){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#pirsensor').html(message);
+    });
+	
+	// Event to avoidsensor
+    socket.on('avoidsensor_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagAvoid){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#avoidsensor').html(message);
+    });
+
+	// Event to trackingsensor
+    socket.on('trackingsensor_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagTracking){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#trackingsensor').html(message);
+    });
+	
+	// Event to photointerruptersensor
+    socket.on('photointerruptersensor_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagPhotointerrupter){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#ky10sensor').html(message);
+    });
+	// Event to trackingsensor
+    socket.on('rotary_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagRotary){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#rotarysensor').html(message);
+    });
+
+    // Event to fire and buzzer
+    socket.on('flameandbuzzer_response', function(msg, cb) {
+      var message = '';
+      if(msg.data.flagFire){
+		$('#firealarmled').attr('src','{{ url_for('static', filename = 'images/firealarm.gif') }}');
+      } else {
+		$('#firealarmled').attr('src','{{ url_for('static', filename = 'images/firealarm-1.jpg') }}');
+      }
+	  if(msg.enable){
+        message = "ON";
+      } else {
+        message = 'OFF';
+      }
+      $('#fire').html(message);
+    });
+    
 	// Event handler for server sent data.
     // The callback function is invoked whenever the server emits data
     // to the client. The data is then displayed in the "Received"
@@ -389,10 +443,9 @@
 			}
 		$("#welcomeS").append("<h2>" + value.first_name + " " + value.last_name + "</h2>");
 		});
-		$('#recognition').attr('src', '{{ url_for('static', filename = 'images/img-01.jpg') }}');
 		setTimeout(function(){ 
 			$('#recognition').attr('src','/recognition/' + sid + '?' + Date.now());
-			$("#welcomeS h2").remove();
+			$("#welcomeS h2, #welcomeS p").remove();
 		}, 5000);
         if (cb)
             cb();

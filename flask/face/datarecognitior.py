@@ -2,38 +2,77 @@ import time
 import cv2
 import os
 import numpy as np
+import pickle
+import imutils
+import face_recognition
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 #Load a cascade file for detecting faces
-face_cascade = cv2.CascadeClassifier(dir_path + '/xml/haarcascade_frontalface_default.xml')
+detector = cv2.CascadeClassifier(dir_path + '/xml/haarcascade_frontalface_default.xml')
 
-#use Local Binary Patterns Histograms
-recognizer = cv2.face.LBPHFaceRecognizer_create()
+data = None
 
-if os.path.exists(dir_path + '/trainer/trainer.yml'):
-        #Load a trainer file
-    recognizer.read(dir_path + '/trainer/trainer.yml')
-
+def encodings():
+	global data
+	if os.path.isfile(dir_path + "/faceencodings.pickle"):
+		data = pickle.loads(open(dir_path + "/faceencodings.pickle", "rb").read())
 
 def recognition(frame):
-    id = None
-    ids = []
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    # convert frame to array
-    image = frame.copy()
-    #Convert to grayscale
-    gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    #Look for faces in the image using the loaded cascade file
-    faces = face_cascade.detectMultiScale(gray, scaleFactor = 1.2, minNeighbors = 5, minSize = (100, 100), flags = cv2.CASCADE_SCALE_IMAGE)
-    #Draw a rectangle around every found face
-    for (x,y,w,h) in faces:
-        roi_gray = gray[y:y + h, x:x + w]
-        cv2.rectangle(image,(x,y),(x+w,y+h),(255,0,0),2)
-        id, confidence = recognizer.predict(gray[y:y+h,x:x+w])
-        # Check if confidence is less them 100 ==> "0" is perfect match 
-        if (confidence < 100):
-            ids.append(id)
-        else:
-            ids.append(0)
+	global data
+	if data is None:
+		return [], frame
+	frame = imutils.resize(frame, width=500)
+	# convert the input frame from (1) BGR to grayscale (for face
+	# detection) and (2) from BGR to RGB (for face recognition)
+	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+	# detect faces in the grayscale frame
+	rects = detector.detectMultiScale(gray, scaleFactor=1.1, 
+		minNeighbors=5, minSize=(30, 30),
+		flags=cv2.CASCADE_SCALE_IMAGE)
 
-    return np.unique(ids), image
+	# OpenCV returns bounding box coordinates in (x, y, w, h) order
+	# but we need them in (top, right, bottom, left) order, so we
+	# need to do a bit of reordering
+	boxes = [(y, x + w, y + h, x) for (x, y, w, h) in rects]
+
+	# compute the facial embeddings for each face bounding box
+	encodings = face_recognition.face_encodings(rgb, boxes)
+	names = []
+
+	# loop over the facial embeddings
+	for encoding in encodings:
+		# attempt to match each face in the input image to our known
+		# encodings
+		matches = face_recognition.compare_faces(data["encodings"],
+			encoding)
+		name = "0"
+
+		# check to see if we have found a match
+		if True in matches:
+			# find the indexes of all matched faces then initialize a
+			# dictionary to count the total number of times each face
+			# was matched
+			matchedIdxs = [i for (i, b) in enumerate(matches) if b]
+			counts = {}
+
+			# loop over the matched indexes and maintain a count for
+			# each recognized face face
+			for i in matchedIdxs:
+				name = data["names"][i]
+				counts[name] = counts.get(name, 0) + 1
+
+			# determine the recognized face with the largest number
+			# of votes (note: in the event of an unlikely tie Python
+			# will select first entry in the dictionary)
+			name = max(counts, key=counts.get)
+		
+		# update the list of names
+		names.append(name)
+
+	# loop over the recognized faces
+	for ((top, right, bottom, left), name) in zip(boxes, names):
+		# draw the predicted face name on the image
+		cv2.rectangle(frame, (left, top), (right, bottom),
+			(0, 255, 0), 2)
+	return np.unique(names), frame

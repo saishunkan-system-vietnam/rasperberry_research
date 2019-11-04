@@ -12,8 +12,10 @@ STATE_INIT_PULL_UP = 2
 STATE_DATA_FIRST_PULL_DOWN = 3
 STATE_DATA_PULL_UP = 4
 STATE_DATA_PULL_DOWN = 5
-
+Enabled = False
 def read_dht11_dat():
+    if Enabled == False:
+        return False
     GPIO.setup(DHTPIN, GPIO.OUT)
     GPIO.output(DHTPIN, GPIO.HIGH)
     time.sleep(0.05)
